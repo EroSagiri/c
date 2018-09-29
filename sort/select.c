@@ -10,6 +10,24 @@ void printfArray(int a[], int l) {
 	}
 }
 
+// 选择排序
+int * selectSort(int a[], int l) {
+	int i, j, maxIndex, t;
+	
+	for (i = 0; i < l-1; i ++) {
+		maxIndex = 0;
+		for (j = 1; j < l-i; j ++) {
+			if (a[j] > a[maxIndex])
+				maxIndex = j;
+		}
+
+		t = a[maxIndex];
+		a[maxIndex] = a[l-i-1];
+		a[l-i-1] = t;
+	}
+
+	return a;
+}
 
 int main() {
 	printf("选择排序\n");
@@ -19,20 +37,6 @@ int main() {
 	int t;
 
 	printfArray(a, l);
-
-	for (int i = 0; i < l-1; i ++) {
-		int maxIndex = 0;
-		for (int j = 1; j < l-i; j ++) {
-			if (a[j] > a[maxIndex]) {
-				maxIndex = j;
-			}
-		}
-	// 交换
-	t = a[maxIndex];
-	a[maxIndex] = a[l-i-1];
-	a[l-i-1] = t;
-	}
-	printfArray(a, l);	
-
+	printfArray(selectSort(a, l), l);
 	return 0;
 }
