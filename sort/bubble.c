@@ -11,29 +11,32 @@ void printfArray(int a[],int l) {
 
 }
 
-
-int main() {
-	// 冒泡排序小到大
-	printf("冒泡排序\n");
-	int a[] = {23, 12, 45, 1, 15};
-	int l= 5;
-	int t;
-
-	printf("原始数组 : ");
-	printfArray(a, l);
-	
-	for (int i = 0; i < l; i ++) {
-		for (int j = 0; j < l-i-1; j ++) {
+// 冒泡排序
+int * bubbleSort(int a[], int l) {
+	int i, j, t, count;
+	for (i = 0; i < l; i ++) {
+		count = 0;
+		for (j = 0; j < l-i-1; j ++) {
 			if (a[j] > a[j+1]) {
 				t = a[j];
 				a[j] = a[j+1];
 				a[j+1] = t;
+				count ++;
 			}
 		}
-		printf("第%d次排序: ", i);
-		printfArray(a, l);
+		if (count == 0)
+			break;
 	}
-	
 
+	return a;
+}
+
+int main() {
+	printf("冒泡排序\n");
+	int a[] = {50500, 23, 1000, 12, 45, 1, 15, 123, 23423, 1210};
+	int l= 10;
+
+	printfArray(a, l);
+	printfArray(bubbleSort(a, l), l);
 	return 0;
 }
