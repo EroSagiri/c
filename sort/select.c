@@ -1,42 +1,50 @@
 #include <stdio.h>
-// 打印数组
-void printfArray(int a[], int l) {
-	for(int i =0; i < l; i ++) {
-		if (i != l-1) {
-			printf("%d, ", a[i]);
-		} else {
-			printf("%d\n", a[i]);
-		}
-	}
-}
 
-// 选择排序
-int * selectSort(int a[], int l) {
-	int i, j, maxIndex, t;
-	
-	for (i = 0; i < l-1; i ++) {
-		maxIndex = 0;
-		for (j = 1; j < l-i; j ++) {
-			if (a[j] > a[maxIndex])
-				maxIndex = j;
-		}
-
-		t = a[maxIndex];
-		a[maxIndex] = a[l-i-1];
-		a[l-i-1] = t;
-	}
-
-	return a;
-}
+void swap(int *a, int *b);
+void selectSort(int a[], int l);
+void printfArray(int a[], int l);
 
 int main() {
-	printf("选择排序\n");
+	int a[] = {1, 2, 3, 3, 1, 21, 21, 4324, 32, 54, 23};
+	printfArray(a, sizeof(a)/sizeof(a[0]));
+	selectSort(a, sizeof(a)/sizeof(a[0]));
+	printfArray(a, sizeof(a)/sizeof(a[0]));
+}
 
-	int a[] = {12, 2, 34, 213, 23};
-	int l = 5;
-	int t;
+/**
+ * swap
+ */
+void swap(int *a, int *b) {
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
 
-	printfArray(a, l);
-	printfArray(selectSort(a, l), l);
-	return 0;
+/**
+ * select sort min to max
+ */
+void selectSort(int a[], int l) {
+	int minIndex;
+	for (int i = 0; i < l-1; i ++) {
+		minIndex = i;
+		for (int j = i+1; j < l; j ++) {
+			if (a[j] < a[minIndex]) {
+				minIndex = j;
+			}
+		}
+		swap(&a[i], &a[minIndex]);
+	}
+}
+
+/**
+ * printf array
+ */
+void printfArray(int a[], int l) {
+	for (int i = 0; i < l; i ++) {
+		if (i == l-1) {
+			printf("%d\n", a[i]);
+		} else {
+			printf("%d, ", a[i]);
+		}
+	}
 }
